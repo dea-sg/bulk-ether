@@ -3,6 +3,8 @@ mod utils;
 use ethers::prelude::*;
 use ethers::utils::parse_units;
 use std::io;
+use std::time::Duration;
+use tokio::time::sleep;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -53,11 +55,33 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     "Transaction sent to {} with tx hash: {:?}",
                     address, tx_hash
                 );
+                // トランザクションがブロックに取り込まれるまで待機
+                match pending_tx.await {
+                    Ok(receipt) => {
+                        if let Some(receipt) = receipt {
+                            println!(
+                                "Transaction confirmed for {} with status: {:?}",
+                                address, receipt.status
+                            );
+                        } else {
+                            println!(
+                                "Transaction was dropped or could not be confirmed: {:?}",
+                                tx_hash
+                            );
+                        }
+                    }
+                    Err(err) => {
+                        println!("Failed to confirm transaction for {}: {:?}", address, err);
+                    }
+                }
             }
             Err(err) => {
                 println!("Failed to send transaction to {}: {:?}", address, err);
             }
         }
+
+        // トランザクションの間に少し待機時間を追加
+        sleep(Duration::from_secs(15)).await; // 15秒待機してから次のトランザクションを送信
     }
 
     Ok(())
