@@ -13,3 +13,9 @@ rustup target add x86_64-pc-windows-gnu
 (一回でいい)
 brew install mingw-w64
 cargo build --release --target x86_64-pc-windows-gnu
+
+lint
+cargo clippy
+
+format
+cargo fmt
