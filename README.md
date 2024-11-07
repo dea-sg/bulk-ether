@@ -41,4 +41,8 @@ brew install mingw-w64
 // これでtarget/x86_64-pc-windows-gnu/release/bulk-ether.exeが生成される
 cargo build --release --target x86_64-pc-windows-gnu
 
+// macはこっち
+// これでtarget/release/bulk-ether が生成される
+cargo build --release
+
 ```
