@@ -4,7 +4,7 @@
 ## 使い方(Windowsの場合)
 ### 準備
 1. 適当なフォルダを作成する
-2. releasesページから最新のbulk-ether.zipをダウンロードし、解凍する
+2. [releasesページ](https://github.com/dea-sg/bulk-ether/releases)から最新のbulk-ether.zipをダウンロードし、解凍する
 3. アドレスを記載したcsvファイルを作成する、名前はtarget.csvとする
 4. 1に作成したフォルダに2で解凍したファイルと3で作成したcsvファイルを配置する
 ### 実行
